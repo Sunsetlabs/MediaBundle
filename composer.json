@@ -1,0 +1,23 @@
+{
+    "name": "sunsetlabs/media-bundle",
+    "type": "symfony-bundle",
+    "description": "Media tools for Symfony applications",
+    "keywords": ["media", "images", "tools"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alejo Rodriguez",
+            "email": "a.rodsott@gmail.com"
+        },
+        {
+            "name": "Sunsetlabs",
+            "homepage": "http://sunsetlabs.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Sunsetlabs\\MediaBundle\\": "" }
+    },
+    "branch-alias" : {
+        "dev-master" : "master"
+    }
+}

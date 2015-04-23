@@ -1,0 +1,5 @@
+services:
+    sunsetlabs_media.form.type.image:
+        class: Sunsetlabs\MediaBundle\Form\Type\ImageType
+        tags:
+            - { name: form.type, alias: image_type }
