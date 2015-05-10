@@ -110,7 +110,7 @@ class Media
     {
         $file = $this->getAbsolutePath();
         if ($file) {
-            unlink($file);
+            @unlink($file);
         }
     }
 
@@ -145,5 +145,12 @@ class Media
     public function getType()
     {
         return 'Media';
+    }
+
+    public function __toString()
+    {
+        return null === $this->path
+            ? $this->getType()
+            : $this->getUploadRootDir().'/'.$this->path;
     }
 }
