@@ -24,5 +24,12 @@ class SunsetlabsMediaExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $resources = array();
+        if ($container->hasParameter('twig.form.resources')) {
+            $resources = $container->getParameter('twig.form.resources');
+        }
+        $resources[] = '@SunsetlabsMediaBundle/Form/fields.html.twig';
+        $container->setParameter('twig.form.resources', $resources);
     }
 }

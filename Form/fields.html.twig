@@ -1,0 +1,6 @@
+{% block image_type_widget %}
+	{% if form.vars.data and form.vars.data.getWebPath() %}
+		<img src="{{ form.vars.data.getWebPath() }}" class="img-thumb">
+	{% endif %}
+    {{ form_widget(form.file, { 'attr' : { 'class' : 'form-control' } }) }}
+{% endblock %}
