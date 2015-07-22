@@ -33,6 +33,11 @@ class Media
 	protected $file;
     protected $temp;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $obj_class = null;
+
 	public function getId()
 	{
 		return $this->id;
@@ -62,6 +67,17 @@ class Media
             $this->temp = $this->path;
             $this->path = null;
         }
+        return $this;
+    }
+
+    public function getObjClass()
+    {
+        return $this->obj_class;
+    }
+
+    public function setObjClass($class)
+    {
+        $this->obj_class = $class;
         return $this;
     }
 
@@ -96,7 +112,7 @@ class Media
         // check if we have an old image
         if (isset($this->temp)) {
             // delete the old image
-            unlink($this->getUploadRootDir().'/'.$this->temp);
+            @unlink($this->getUploadRootDir().'/'.$this->temp);
             // clear the temp image path
             $this->temp = null;
         }
@@ -139,7 +155,11 @@ class Media
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads';
+        $dir = 'uploads';
+
+        return null === $this->getObjClass()
+            ? $dir
+            : $dir . '/' . $this->getObjClass();
     }
 
     public function getType()
