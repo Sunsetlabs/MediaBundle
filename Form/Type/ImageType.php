@@ -23,8 +23,8 @@ class ImageType extends AbstractType
         $parent = $form->getParent();
 
         if ($data and !$data->getId() and $parent) {
-            $class = $this->getBindDataClass($parent);
-            $data->setObjClass($class);
+            $object = $this->getBindDataObject($parent);
+            $data->setRelatedObject($object);
         }
     }
 
@@ -40,16 +40,17 @@ class ImageType extends AbstractType
         return 'image_type';
     }
 
-    protected function getBindDataClass($form)
+    protected function getBindDataObject($form)
     {
-        $class = get_class($form->getData());
+        $object = $form->getData();
+        $class = get_class($object);
         $class = explode("\\", $class);
         $class = end($class);
 
         if ($class == 'PersistentCollection' or $class == 'ArrayCollection') {
-            return $this->getBindDataClass($form->getParent());
+            return $this->getBindDataObject($form->getParent());
         }
 
-        return $class;
+        return $object;
     }
 }
