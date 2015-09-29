@@ -313,9 +313,11 @@ class Media
      */
     public function setRelatedObject($object)
     {
-        $this->setObjId($object->getId());
-        $this->setObjQualifiedClass(get_class($object));
-        $this->setObjClass(substr($this->getObjQualifiedClass(), strrpos($this->getObjQualifiedClass(), '\\')+1));
+        if ($object) {
+            $this->setObjId($object->getId());
+            $this->setObjQualifiedClass(get_class($object));
+            $this->setObjClass(substr($this->getObjQualifiedClass(), strrpos($this->getObjQualifiedClass(), '\\')+1));
+        }
         return $this;
     }
 
